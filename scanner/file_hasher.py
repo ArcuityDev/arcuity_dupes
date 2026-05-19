@@ -213,7 +213,7 @@ class FileHasher:
     # ---------------------------------------------------------------- #
 
     def _connect(self) -> sqlite3.Connection:
-        con = sqlite3.connect(self.db_path, timeout=30, check_same_thread=False)
+        con = sqlite3.connect(self.db_path, timeout=120, check_same_thread=False)
         con.execute("PRAGMA journal_mode=WAL")
         con.execute("PRAGMA synchronous=NORMAL")
         con.execute("PRAGMA temp_store=MEMORY")
@@ -482,9 +482,7 @@ class FileHasher:
         )
 
         # Estimate total for the progress bar (fast pass, no hashing).
-        logger.info("Estimating file count …")
-        estimated_total = _estimate_file_count(root_path, exclude_patterns)
-        logger.info("Estimated %d files to scan.", estimated_total)
+        estimated_total = None   # skip pre-walk on NTFS — tqdm shows spinner instead
 
         files_done = 0
         bytes_done = 0
