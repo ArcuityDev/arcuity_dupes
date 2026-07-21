@@ -1,0 +1,67 @@
+scan:
+  # Paths to scan. On WSL, Windows drives appear as /mnt/c, /mnt/d, etc.
+  default_paths:
+    - /mnt/c/Dev
+  exclude_patterns:
+    - "**/.git/**"
+    - "**/node_modules/**"
+    - "**/__pycache__/**"
+    - "**/.venv/**"
+    - "**/venv/**"
+    - "**/*.pyc"
+    - "**/dist/**"
+    - "**/build/**"
+    - "**/.next/**"
+    - "**/target/**"
+  min_file_size_bytes: 1
+  max_depth: 10
+
+analysis:
+  min_dir_files: 2
+  min_similarity_threshold: 0.10
+  max_comparison_depth: 3
+
+github:
+  # Token loaded from GITHUB_TOKEN env var
+  target_repo: arcuity-test/arcuity_dupes
+  fetch_private_repos: true
+  exclude_forks: false
+  binary_extensions:
+    - .png
+    - .jpg
+    - .jpeg
+    - .gif
+    - .bmp
+    - .ico
+    - .mp4
+    - .mov
+    - .avi
+    - .mp3
+    - .wav
+    - .zip
+    - .tar
+    - .gz
+    - .bz2
+    - .7z
+    - .rar
+    - .exe
+    - .dll
+    - .so
+    - .dylib
+    - .bin
+    - .obj
+    - .o
+    - .a
+    - .lib
+    - .woff
+    - .woff2
+    - .ttf
+    - .eot
+    - .otf
+    - .pdf
+
+reporting:
+  output_dir: ./reports
+  formats:
+    - html
+    - markdown
